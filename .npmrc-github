@@ -1,2 +1,11 @@
-//registry.npmjs.org/:_authToken=${NPM_TOKEN}
-@julienverkest:registry=https://registry.npmjs.org
+'//registry.npmjs.org/:_authToken': '${NPM_TOKEN}'
+'@julienverkest:registry': 'https://registry.npmjs.org'
+steps:
+  - name: Debug npm setup
+    run: |
+      echo "npm registry: $(npm config get registry)"
+      echo "npm auth token: $(cat .npmrc | grep _authToken)"
+  - name: Verify npm access
+    run: npm whoami
+    env:
+      NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

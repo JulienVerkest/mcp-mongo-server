@@ -78,11 +78,11 @@ export async function handleCallToolRequest({
 
   // Create new args object without objectIdMode property
   const filteredArgs: Record<string, unknown> = {};
-  Object.entries(args).forEach(([key, value]) => {
+  for (const [key, value] of Object.entries(args)) {
     if (key !== "objectIdMode") {
       filteredArgs[key] = value;
     }
-  });
+  }
 
   // Checking whether sort option provided is valid
   if (args.sort) {
@@ -184,12 +184,11 @@ function parseSort(sort: unknown): Record<string, 1 | -1> | null {
 
   const validSort: Record<string, 1 | -1> = {};
 
-  // Remplacer la boucle for...of par Object.entries().forEach()
-  Object.entries(sort).forEach(([key, value]) => {
+  for (const [key, value] of Object.entries(sort)) {
     if (typeof value === 'number' && (value === 1 || value === -1)) {
       validSort[key] = value;
     }
-  });
+  }
 
   return Object.keys(validSort).length > 0 ? validSort : null;
 }
@@ -245,7 +244,7 @@ function processObjectIdInFilter(
     // Create a new filter object to handle dates
     const result: Record<string, unknown> = {};
     
-    Object.entries(filter).forEach(([key, value]) => {
+    for (const [key, value] of Object.entries(filter)) {
       if (typeof value === "string" && isISODateString(value)) {
         // Convert ISO date string to Date object
         result[key] = new Date(value);
@@ -279,13 +278,13 @@ function processObjectIdInFilter(
       } else {
         result[key] = value;
       }
-    });
+    }
     return result as Filter<Document>;
   }
 
   const result: Record<string, unknown> = {};
 
-  Object.entries(filter).forEach(([key, value]) => {
+  for (const [key, value] of Object.entries(filter)) {
     if (typeof value === "string" && isObjectIdString(value)) {
       // Convert string to ObjectId if either:
       // 1. objectIdMode is "force" (convert all 24-char hex strings)
@@ -334,7 +333,7 @@ function processObjectIdInFilter(
     } else {
       result[key] = value;
     }
-  });
+  }
 
   return result;
 }
@@ -772,11 +771,11 @@ async function handleCount(
     };
 
     // Remove undefined options
-    Object.keys(options).forEach((key) => {
+    for (const key of Object.keys(options)) {
       if (options[key as keyof CountDocumentsOptions] === undefined) {
         delete options[key as keyof CountDocumentsOptions];
       }
-    });
+    }
 
     // Execute count operation
     const count = await collection.countDocuments(countQuery, options);
