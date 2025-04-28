@@ -61,7 +61,7 @@ npm install -g mcp-mongo-server
 
 ```bash
 # Clone repository
-git clone https://github.com/kiliczsh/mcp-mongo-server.git
+git clone https://github.com/julienverkest/mcp-mongo-server.git
 cd mcp-mongo-server
 
 # Install dependencies
@@ -208,16 +208,16 @@ Add the server configuration to Claude Desktop's config file:
       "command": "npx",
       "args": [
         "-y",
-        "github:kiliczsh/mcp-mongo-server",
-        "mongodb://muhammed:kilic@localhost:27017/database"
+        "github:julienverkest/mcp-mongo-server",
+        "mongodb://localhost:27017/database"
       ]
     },
     "mongodb-readonly": {
       "command": "npx",
       "args": [
         "-y",
-        "github:kiliczsh/mcp-mongo-server",
-        "mongodb://muhammed:kilic@localhost:27017/database",
+        "github:julienverkest/mcp-mongo-server",
+        "mongodb://localhost:27017/database",
         "--read-only"
       ]
     }

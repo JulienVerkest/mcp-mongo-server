@@ -1,8 +1,8 @@
 FROM debian:bullseye-slim
 
 ENV DEBIAN_FRONTEND=noninteractive \
-    GLAMA_VERSION="0.2.0" \
-    PATH="/home/service-user/.local/bin:${PATH}"
+  GLAMA_VERSION="0.2.0" \
+  PATH="/home/service-user/.local/bin:${PATH}"
 
 RUN (groupadd -r service-user)
 RUN (useradd -u 1987 -r -m -g service-user service-user)
@@ -25,7 +25,7 @@ USER service-user
 
 WORKDIR /app
 
-RUN git clone https://github.com/kiliczsh/mcp-mongo-server . && git checkout main
+RUN git clone https://github.com/julienverkest/mcp-mongo-server . && git checkout main
 
 RUN (npm install)
 RUN (npm run build)
