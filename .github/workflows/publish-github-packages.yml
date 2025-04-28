@@ -83,11 +83,6 @@ jobs:
           echo "registry=https://registry.npmjs.org/" >> .npmrc
           echo "always-auth=true" >> .npmrc
 
-      - name: Publish package to npm
-        run: npm publish --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-
       - name: Debug npm setup
         run: |
           echo "npm registry: $(npm config get registry)"
@@ -95,5 +90,10 @@ jobs:
 
       - name: Verify npm access
         run: npm whoami
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Publish package to npm
+        run: npm publish --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
